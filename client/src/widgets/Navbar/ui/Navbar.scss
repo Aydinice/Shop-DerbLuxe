@@ -1,0 +1,53 @@
+.Navbar {
+  background-color: #1e3a8a; /* Темно-синий цвет */
+  height: 60px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* Убедимся, что Navbar всегда сверху */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Тень для объема */
+
+  .container {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    max-width: 1200px; /* Ограничиваем ширину контента */
+    margin: 0 auto; /* Центрируем контент */
+  }
+
+  .image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Круглая форма для логотипа */
+  }
+
+  .cartImage {
+    width: 24px;
+    height: 24px;
+    filter: invert(1); /* Белый цвет иконки */
+  }
+
+  .navItem {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Расстояние между элементами */
+  }
+
+  a {
+    text-decoration: none;
+    color: white;
+    font-weight: 500; /* Полужирный текст */
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #93c5fd; /* Светло-синий цвет при наведении */
+    }
+  }
+
+  .rightCont2 {
+    margin-left: 20px;
+  }
+}

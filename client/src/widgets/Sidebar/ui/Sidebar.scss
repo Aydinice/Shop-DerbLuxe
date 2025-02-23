@@ -1,0 +1,67 @@
+.Sidebar {
+  background-color: #1e3a8a; /* Темно-синий цвет, как у Navbar */
+  height: calc(100vh - 60px); /* Учитываем высоту Navbar */
+  width: 250px; /* Ширина Sidebar */
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  transition: width 0.3s ease-in-out;
+  overflow-x: hidden;
+  box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.2);
+  color: white;
+  z-index: 999; /* Убедимся, что Sidebar под Navbar */
+
+  &.offWidth {
+    width: 60px; /* Уменьшенная ширина */
+
+    select {
+      display: none;
+    }
+  }
+
+  select {
+    padding: 10px;
+    margin: 20px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #1e3a8a;
+    font-size: 14px;
+    width: calc(100% - 20px);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  .containerSidebar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+
+    .butOf {
+      background-color: rgba(255, 255, 255, 0.2);
+      border: none;
+      border-radius: 5px;
+      color: white;
+      padding: 10px 15px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.4);
+      }
+
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+      }
+    }
+  }
+}

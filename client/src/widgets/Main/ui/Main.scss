@@ -1,0 +1,35 @@
+.Main {
+  background-color: #ffffff; /* Белый фон */
+  flex: 1;
+  padding: 20px;
+  margin-left: 250px; /* Учитываем ширину Sidebar */
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  transition: margin-left 0.3s ease-in-out; /* Плавное изменение отступа */
+
+  &.fullWidth {
+    margin-left: 60px; /* Учитываем уменьшенную ширину Sidebar */
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #1e3a8a; /* Темно-синий цвет */
+  }
+
+  p {
+    font-size: 1rem;
+    color: #333; /* Темный цвет текста */
+  }
+
+  a {
+    text-decoration: none;
+    color: #1e3a8a;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #93c5fd; /* Светло-синий цвет при наведении */
+    }
+  }
+}

@@ -1,0 +1,35 @@
+.CartProduct {
+  width: 200px; /* Увеличенная ширина */
+  height: 300px; /* Увеличенная высота */
+  background-color: #065716; /* Светлый фон */
+  margin: 10px; /* Отступы между карточками */
+  border-radius: 8px; /* Скругленные углы */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Тень для объема */
+  padding: 15px; /* Внутренние отступы */
+  text-align: center; /* Выравнивание текста по центру */
+  transition: transform 0.2s ease-in-out; /* Плавная анимация при наведении */
+  color: #333; /* Темный цвет текста */
+
+  &:hover {
+    transform: scale(1.05); /* Увеличение при наведении */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Более выраженная тень при наведении */
+  }
+
+  h1 {
+    font-size: 1.2rem; /* Увеличенный размер заголовка */
+    margin-bottom: 10px; /* Отступ от заголовка */
+    color: #007bff; /* Синий цвет заголовка */
+  }
+
+  h2 {
+    font-size: 1rem; /* Размер цены */
+    color: #28a745; /* Зеленый цвет цены */
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 0.9rem; /* Размер остального текста */
+    margin-bottom: 5px;
+    color: #28a745;
+  }
+}

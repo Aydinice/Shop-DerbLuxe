@@ -1,0 +1,22 @@
+/* Сброс стилей */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Установка высоты для html, body и #root */
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  font-family: "Arial", sans-serif; /* Используем стандартный шрифт */
+  background-color: #f5f5f5; /* Светлый фон для всего приложения */
+}
+
+.App {
+  min-height: 100vh; /* Занимает как минимум всю высоту экрана */
+  display: flex;
+  flex-direction: column;
+}

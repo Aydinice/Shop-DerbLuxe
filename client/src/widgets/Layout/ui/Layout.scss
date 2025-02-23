@@ -1,0 +1,18 @@
+// Layout.scss
+
+.Layout {
+  display: flex;
+  flex-direction: column; /* Important: Stack Navbar and the flex container below */
+  min-height: 100vh; /* Ensure full height */
+  //padding-top: 60px; /* Add padding equal to the Navbar height */
+
+  & > div:last-child {
+    display: flex;
+    flex: 1; /* Allow sidebar and main to share remaining space */
+  }
+}
+
+// or Main.scss
+.Main {
+  padding-top: 60px;
+}

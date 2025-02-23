@@ -1,0 +1,20 @@
+.ModalForm {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  z-index: 1000;
+  .ContentModalForm {
+    padding: 20px;
+    background-color: white;
+    max-width: 400px;
+    width: 100%;
+  }
+}
