@@ -1,5 +1,5 @@
 const { DataTypes } = require("sequelize");
-const sequelize = require("../sequelize");
+const sequelize = require("../sequelize"); // Импортируем экземпляр Sequelize
 
 const Product = sequelize.define(
   "product",

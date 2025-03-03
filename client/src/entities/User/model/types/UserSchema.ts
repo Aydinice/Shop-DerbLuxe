@@ -1,13 +1,13 @@
-export interface UserSchema {
+export interface User {
   id: number;
-  username: string;
-  email: string;
-  role: string;
+  username: string | null;
+  email: string | null;
+  role: string | null;
 }
 
-export interface UserState {
-  user: UserSchema | null;
+export interface UserSchema {
+  user: User | null;
   token: string | null;
-  error: string | null;
   isLoading: boolean;
+  error: string | null;
 }

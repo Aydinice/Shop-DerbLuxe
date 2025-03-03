@@ -1,16 +1,21 @@
 const express = require("express");
 const sequelize = require("./sequelize");
-const Product = require("./models/Product");
 const NavigationElement = require("./models/NavigationElement");
 const cors = require("cors");
 const authRoutes = require("./routes/auth");
+const basketRoutes = require("./routes/basket");
+const { Basket, Product, User } = require("./models");
+
+sequelize.sync().then(() => {
+  console.log("База данных синхронизирована");
+});
 
 const app = express();
-app.use(cors()); // Разрешить CORS
+app.use(cors());
 app.use(express.json());
 
-// Подключаем маршруты аутентификации
 app.use("/auth", authRoutes);
+app.use("/api", basketRoutes); // Подключаем маршруты корзины
 
 // Получить все продукты
 app.get("/products", async (req, res) => {

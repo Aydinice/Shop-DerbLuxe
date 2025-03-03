@@ -9,13 +9,15 @@ import { StateSchema } from "./StateSchema";
 import { Provider } from "react-redux";
 import { NavigationReducer } from "@/entities/Navigation/model/slice/NavigationSlice";
 import { ProductReducer } from "@/entities/Product/model/productSlice/productSlice";
-import { userReducer } from "@/entities/User/model/userSlice/userSlice";
+import { UserReducer } from "@/entities/User/model/userSlice/userSlice";
+import { BasketReducer } from "@/entities/Basket/model/slice/basketSlice";
 
 export function createReduxStore(initialState?: StateSchema) {
   const rootReducers: ReducersMapObject<StateSchema> = {
     navigation: NavigationReducer,
     product: ProductReducer,
-    user: userReducer,
+    user: UserReducer,
+    basket: BasketReducer,
   };
 
   const store = configureStore({

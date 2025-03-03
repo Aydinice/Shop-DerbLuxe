@@ -1,36 +1,29 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { UserSchema, UserState } from "../types/UserSchema";
+import { User, UserSchema } from "../types/UserSchema";
 
-const initialState: UserState = {
+const initialState: UserSchema = {
   user: null,
   token: null,
-  error: null,
   isLoading: false,
+  error: null,
 };
 
 export const userSlice = createSlice({
-  name: "user",
+  name: "userSlice",
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<UserSchema>) => {
+    setUser: (state, action: PayloadAction<User>) => {
       state.user = action.payload;
     },
     setToken: (state, action: PayloadAction<string>) => {
       state.token = action.payload;
     },
-    setIsLoading: (state, action: PayloadAction<boolean>) => {
-      state.isLoading = action.payload;
-    },
-    setError: (state, action: PayloadAction<string | null>) => {
-      state.error = action.payload;
-    },
     logout: (state) => {
-      state.user = null;
-      state.token = null;
-      state.error = null;
+      (state.user = null), (state.token = null), (state.error = null);
+      localStorage.removeItem("token");
     },
   },
 });
 
-export const { actions: userActions } = userSlice;
-export const { reducer: userReducer } = userSlice;
+export const { actions: UserActions } = userSlice;
+export const { reducer: UserReducer } = userSlice;

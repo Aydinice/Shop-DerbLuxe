@@ -1,11 +1,12 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const User = require("../models/User");
 const authMiddleware = require("../middleware/authMiddleware");
 const router = express.Router();
 
 // Регистрация (публичный маршрут)
+const { User } = require("../models");
+
 router.post("/register", async (req, res) => {
   const { username, email, password, role } = req.body;
 
@@ -18,28 +19,26 @@ router.post("/register", async (req, res) => {
         .json({ error: "Пользователь с таким email уже существует" });
     }
 
-    // Хешируем пароль перед сохранением
-    // const hashedPassword = await bcrypt.hash(password, 10);
-
+    // Создаем пользователя
     const user = await User.create({
       username,
       email,
-      password: password,
+      password, // Используйте hashedPassword, если хешируете пароль
       role,
     });
 
-    // Создаем JWT токен сразу после регистрации
-    const token = jwt.sign(
-      { id: user.id, role: user.role },
-      "your-secret-key",
-      {
-        expiresIn: "1h", // Срок действия токена
-      }
-    );
+    // Создаем корзину для пользователя
 
-    res
-      .status(201)
-      .json({ message: "Пользователь успешно зарегистрирован", token }); // Возвращаем токен
+    // Возвращаем ответ
+    res.status(201).json({
+      message: "Пользователь успешно зарегистрирован",
+      user: {
+        id: user.id,
+        email: user.email,
+        username: user.username,
+        role: user.role,
+      },
+    });
   } catch (error) {
     console.error("Ошибка при регистрации:", error);
     res.status(500).json({ error: "Ошибка при регистрации" });
@@ -77,7 +76,15 @@ router.post("/login", async (req, res) => {
       }
     );
 
-    res.json({ token }); // Возвращаем токен
+    res.json({
+      token,
+      user: {
+        id: user.id,
+        email: user.email,
+        username: user.username,
+        role: user.role,
+      },
+    });
   } catch (error) {
     console.error("Ошибка при входе:", error);
     res.status(500).json({ error: "Ошибка при входе" });

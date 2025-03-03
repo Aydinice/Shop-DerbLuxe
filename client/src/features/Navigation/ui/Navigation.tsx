@@ -1,30 +1,39 @@
 import React, { useState } from "react";
 import { NavigationSchema } from "@/entities/Navigation/model/types/NavigationSchema";
 import logo from "../../../app/assets/logo.png";
-import autorization from "../../../app/assets/autorization.svg";
 import basket from "../../../app/assets/basket.svg";
+import autorization from "../../../app/assets/autorization.svg";
 import ModalForm from "@/shared/ModalForm/ui/ModalForm";
-import { LoginForm } from "@/features/isAuth/ui/LoginForm";
-import { RegistrationForm } from "@/features/isAuth/ui/RegistrationForm";
+import FormRegistration from "@/features/userManager/ui/FormRegistration/FormRegistration";
+import FormLogin from "@/features/userManager/ui/FormLogin/FormLogin";
+import { useDispatch, useSelector } from "react-redux";
+import { UserActions } from "@/entities/User/model/userSlice/userSlice";
+import { tokenSelector } from "@/entities/User/model/selector/userSelector";
 
 interface NavigationProps {
   elements: NavigationSchema[];
 }
 
 export default function Navigation({ elements }: NavigationProps) {
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
-  const [isLoginForm, setIsLoginForm] = useState(true); // Initial state: show LoginForm
+  const [isModal, setIsModal] = useState(false);
+  const [isLoginForm, setisIsLoginForm] = useState(true);
+  const dispatch = useDispatch();
+  const token = useSelector(tokenSelector);
 
-  const openAuthModal = () => {
-    setIsAuthModalOpen(true);
+  const onCloseModal = () => {
+    setIsModal(false);
   };
 
-  const closeAuthModal = () => {
-    setIsAuthModalOpen(false);
+  const showModal = () => {
+    setIsModal(true);
   };
 
   const toggleForm = () => {
-    setIsLoginForm(!isLoginForm); // Toggle between LoginForm and RegistrationForm
+    setisIsLoginForm((prev) => !prev);
+  };
+
+  const logout = () => {
+    dispatch(UserActions.logout());
   };
 
   return (
@@ -60,24 +69,36 @@ export default function Navigation({ elements }: NavigationProps) {
                   </a>
                 </li>
               );
-            case "cart":
+            case "basket":
               return (
                 <li className="navItem rightCont1" key={item.id}>
-                  <a href="#" aria-label="Корзина">
+                  <button style={{ cursor: "pointer" }}>
                     <img className="cartImage" src={basket} alt={item.name} />
-                  </a>
+                  </button>
                 </li>
               );
             case "autorization":
               return (
                 <li className="navItem rightCont2" key={item.id}>
-                  <button onClick={openAuthModal} aria-label="Авторизация">
-                    <img
-                      className="cartImage"
-                      src={autorization}
-                      alt={item.name}
-                    />
-                  </button>
+                  {token ? ( // Проверяем токен из состояния Redux
+                    <button style={{ cursor: "pointer" }} onClick={logout}>
+                      <img
+                        className="cartImage"
+                        src={autorization}
+                        alt={item.name}
+                      />
+                      <p style={{ fontSize: "15px" }}>Выйти</p>
+                    </button>
+                  ) : (
+                    <button style={{ cursor: "pointer" }} onClick={showModal}>
+                      <img
+                        className="cartImage"
+                        src={autorization}
+                        alt={item.name}
+                      />
+                      <p style={{ fontSize: "15px" }}>Войти</p>
+                    </button>
+                  )}
                 </li>
               );
             default:
@@ -85,16 +106,13 @@ export default function Navigation({ elements }: NavigationProps) {
           }
         })}
       </div>
-      <ModalForm isOpen={isAuthModalOpen} onClose={closeAuthModal}>
+      <ModalForm isOpen={isModal} onClose={onCloseModal}>
         {isLoginForm ? (
-          <LoginForm
-            onClose={closeAuthModal}
-            toggleForm={toggleForm} // Pass toggleForm function
-          />
+          <FormLogin toggleForm={toggleForm} onCloseModal={onCloseModal} />
         ) : (
-          <RegistrationForm
-            onClose={closeAuthModal}
-            toggleForm={toggleForm} // Pass toggleForm function
+          <FormRegistration
+            toggleForm={toggleForm}
+            onCloseModal={onCloseModal}
           />
         )}
       </ModalForm>
