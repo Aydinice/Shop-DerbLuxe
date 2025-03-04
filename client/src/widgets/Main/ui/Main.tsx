@@ -1,12 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./Main.scss";
-import axios from "axios";
-import CartProduct from "@/shared/CartProduct/ui/CartProduct";
-import ModalForm from "@/shared/ModalForm/ui/ModalForm";
-import { getProductThunk } from "@/features/productManager/model/thunks/getProductsThunk";
 import ProductsList from "@/features/productManager/ui/ProductList/ProductList";
 import FormUserInfo from "@/features/userManager/ui/FormUserInfo/FormUserInfo";
-import { BasketList } from "@/features/basketManager/ui/BasketList/BasketList";
+import BasketList from "@/features/basketManager/ui/BasketList/BasketList";
+import { OrderList } from "@/features/orderManager/ui/OrderList";
 
 export default function Main() {
   return (
@@ -14,6 +11,7 @@ export default function Main() {
       <ProductsList />
       <FormUserInfo />
       <BasketList />
+      <OrderList />
     </main>
   );
 }

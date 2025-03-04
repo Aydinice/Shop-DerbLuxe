@@ -1,35 +1,51 @@
-// features/basketManager/ui/BasketItems/BasketItems.tsx
-import React from "react";
-import { useBasket } from "../../lib/useBasket";
+import React, { useState } from "react";
 import "./BasketList.scss";
+import { useBasket } from "../../lib/useBasket";
+import { CreateOrder } from "@/features/orderManager/ui/CreateOrder/CreateOrder";
 
-export const BasketList = () => {
+export default function BasketList() {
   const { items, removeFromBasket } = useBasket();
+  const [showOrderForm, setShowOrderForm] = useState(false);
+
+  const totalAmount = items.reduce(
+    (sum, item) => sum + item.product.price * item.quantity,
+    0
+  );
 
   return (
-    <div>
-      <h2>Корзина</h2>
+    <div className="basket-container">
+      <h1>Корзина</h1>
       {items.length === 0 ? (
         <p>Ваша корзина пуста</p>
       ) : (
-        <ul>
-          {items.map((item) => (
-            <li key={item.id}>
-              {item.product ? (
-                <>
-                  {item.product.name} - {item.product.price} - {item.quantity}{" "}
-                  шт.
-                  <button onClick={() => removeFromBasket(item.id)}>
-                    Удалить
-                  </button>
-                </>
-              ) : (
-                <p>Товар не найден</p>
-              )}
-            </li>
-          ))}
-        </ul>
+        <>
+          <ul className="basket-items">
+            {items.map((item) => (
+              <li key={item.id} className="basket-item">
+                <span>{item.product.name}</span>
+                <span>
+                  {item.product.price} ₽ x {item.quantity}
+                </span>
+                <button onClick={() => removeFromBasket(item.id)}>
+                  Удалить
+                </button>
+              </li>
+            ))}
+          </ul>
+          <div className="basket-footer">
+            <p>Итого: {totalAmount} ₽</p>
+            <button
+              className="order-button"
+              onClick={() => setShowOrderForm(true)}
+            >
+              Оформить заказ
+            </button>
+          </div>
+          {showOrderForm && (
+            <CreateOrder onClose={() => setShowOrderForm(false)} />
+          )}
+        </>
       )}
     </div>
   );
-};
+}

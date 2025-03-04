@@ -3,7 +3,7 @@ import { useProducts } from "@/features/productManager/lib/useProducts";
 import { useBasket } from "@/features/basketManager/lib/useBasket";
 
 export default function ProductsList() {
-  const [quantity, setQuantity] = useState(1); // Количество товара для добавления
+  const [quantity, setQuantity] = useState(1);
   const {
     products,
     delProduct,
@@ -18,7 +18,7 @@ export default function ProductsList() {
     filteredSearchQuery,
   } = useProducts();
 
-  const { addToBasket } = useBasket(); // Хук для работы с корзиной
+  const { addToBasketProduct } = useBasket();
 
   return (
     <>
@@ -47,13 +47,7 @@ export default function ProductsList() {
               Удалить
             </button>
             <button
-              onClick={() => {
-                if (quantity > 0) {
-                  addToBasket(item.id, quantity);
-                } else {
-                  alert("Количество товара должно быть больше нуля");
-                }
-              }}
+              onClick={() => addToBasketProduct(item.id, quantity)}
               style={{ marginLeft: "15px" }}
             >
               Добавить в корзину

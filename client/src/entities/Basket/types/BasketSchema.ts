@@ -1,6 +1,5 @@
 import { ProductSchema } from "@/entities/Product/model/types/ProductSchema";
 
-// entities/Basket/model/types/BasketSchema.ts
 export interface BasketSchema {
   id: number;
   userId: number;

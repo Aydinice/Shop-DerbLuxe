@@ -5,13 +5,17 @@ const sequelize = require("../sequelize"); // Импортируем экзем�
 const User = require("./User");
 const Basket = require("./Basket"); // Импортируем из одного файла
 const Product = require("./Product");
+const Order = require("./Order");
+const OrderItem = require("./OrderItem");
 
-// Связи
-User.hasMany(Basket, { foreignKey: "userId" });
-Basket.belongsTo(User, { foreignKey: "userId" });
+// Определяем связи
+Order.hasMany(OrderItem, { as: "order_items" });
+OrderItem.belongsTo(Order);
+OrderItem.belongsTo(Product, { as: "product" });
+Product.hasMany(OrderItem);
 
-Product.hasMany(Basket, { foreignKey: "productId" });
-Basket.belongsTo(Product, { foreignKey: "productId" });
+// Связи для корзины
+Basket.belongsTo(Product, { foreignKey: "productId", as: "product" });
 
 // Экспортируем модели и sequelize
 module.exports = {
@@ -19,4 +23,6 @@ module.exports = {
   User,
   Basket,
   Product,
+  Order,
+  OrderItem,
 };

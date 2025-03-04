@@ -10,7 +10,8 @@ import { Provider } from "react-redux";
 import { NavigationReducer } from "@/entities/Navigation/model/slice/NavigationSlice";
 import { ProductReducer } from "@/entities/Product/model/productSlice/productSlice";
 import { UserReducer } from "@/entities/User/model/userSlice/userSlice";
-import { BasketReducer } from "@/entities/Basket/model/slice/basketSlice";
+import { BasketReducer } from "@/entities/Basket/model/basketSlice";
+import { OrderReducer } from "@/entities/Order/model/slice/orderSlice";
 
 export function createReduxStore(initialState?: StateSchema) {
   const rootReducers: ReducersMapObject<StateSchema> = {
@@ -18,6 +19,7 @@ export function createReduxStore(initialState?: StateSchema) {
     product: ProductReducer,
     user: UserReducer,
     basket: BasketReducer,
+    order: OrderReducer,
   };
 
   const store = configureStore({

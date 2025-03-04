@@ -6,24 +6,26 @@ const initialState: BasketState = {
 };
 
 export const basketSlice = createSlice({
-  name: "basket",
+  name: "basketSlice",
   initialState,
   reducers: {
-    setBasketItems: (state, action: PayloadAction<BasketSchema[]>) => {
-      state.items = action.payload;
+    setBasketItems: (state, actions: PayloadAction<BasketSchema[]>) => {
+      state.items = actions.payload;
     },
-    addBasketItem: (state, action: PayloadAction<BasketSchema>) => {
+    addProductToBasket: (state, action: PayloadAction<BasketSchema>) => {
       const existingItem = state.items.find(
         (item) => item.productId === action.payload.productId
       );
       if (existingItem) {
-        existingItem.quantity = action.payload.quantity; // Просто устанавливаем новое значение
+        existingItem.quantity = action.payload.quantity;
       } else {
         state.items.push(action.payload);
       }
     },
-    removeBasketItem: (state, action: PayloadAction<number>) => {
-      state.items = state.items.filter((item) => item.id !== action.payload);
+    removeProductBasket: (state, action: PayloadAction<number>) => {
+      state.items = [...state.items].filter(
+        (item) => item.id !== action.payload
+      );
     },
   },
 });

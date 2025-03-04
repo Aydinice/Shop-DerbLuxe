@@ -4,6 +4,7 @@ const NavigationElement = require("./models/NavigationElement");
 const cors = require("cors");
 const authRoutes = require("./routes/auth");
 const basketRoutes = require("./routes/basket");
+const orderRoutes = require("./routes/order");
 const { Basket, Product, User } = require("./models");
 
 sequelize.sync().then(() => {
@@ -16,6 +17,7 @@ app.use(express.json());
 
 app.use("/auth", authRoutes);
 app.use("/api", basketRoutes); // Подключаем маршруты корзины
+app.use("/api", orderRoutes); // Добавляем префикс /api
 
 // Получить все продукты
 app.get("/products", async (req, res) => {
